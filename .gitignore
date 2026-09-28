@@ -1,0 +1,5 @@
+# Models are downloaded by install.sh
+*.bin
+*.part
+autosub-progress
+.DS_Store

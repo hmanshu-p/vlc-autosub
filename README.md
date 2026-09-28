@@ -36,6 +36,16 @@ A small window shows progress and has a Cancel button. You can keep watching whi
 
 **Translate to English** turns speech in any language into English subtitles.
 
+## Update
+
+Installed copies don't update themselves. To get the latest version, run:
+
+```bash
+bash <(curl -fsSL https://raw.githubusercontent.com/hmanshu-p/vlc-autosub/main/install.sh) --update
+```
+
+This keeps your current model, so nothing big is downloaded. Then restart VLC. [Watch the repo](https://github.com/hmanshu-p/vlc-autosub) (Watch → Custom → Releases) to hear about new versions.
+
 ## Change model or uninstall
 
 Run the installer again and pick a different number. The old model is deleted, so only one is ever kept. You can also skip the menu:
@@ -45,7 +55,7 @@ bash <(curl -fsSL https://raw.githubusercontent.com/hmanshu-p/vlc-autosub/main/i
 bash <(curl -fsSL https://raw.githubusercontent.com/hmanshu-p/vlc-autosub/main/install.sh) --uninstall
 ```
 
-If you cloned the repo, `./install.sh` does the same.
+If you cloned the repo, `git pull && ./install.sh --update` updates, and `./install.sh` does the rest.
 
 ## Troubleshooting
 

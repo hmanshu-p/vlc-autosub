@@ -14,7 +14,7 @@ local DIR, dlg, status_label, lang_dd, translate_cb
 function descriptor()
   return {
     title = "AutoSub - Generate Subtitles",
-    version = "1.0",
+    version = "1.1",
     shortdesc = "AutoSub",
     description = "Transcribes the playing video offline with whisper.cpp and loads the subtitles.",
     url = "https://github.com/hmanshu-p/vlc-autosub",

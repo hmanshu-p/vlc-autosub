@@ -2,7 +2,8 @@
 # AutoSub installer (macOS). From a clone:  ./install.sh
 # Or without cloning:
 #   bash <(curl -fsSL https://raw.githubusercontent.com/hmanshu-p/vlc-autosub/main/install.sh)
-# Options:  --model <name>   install or switch to a model without the menu
+# Options:  --update         get the latest AutoSub, keeping your current model
+#           --model <name>   install or switch to a model without the menu
 #           --uninstall      remove AutoSub and its model
 set -euo pipefail
 
@@ -47,9 +48,15 @@ fi
 command -v brew >/dev/null || die "Homebrew is required: https://brew.sh"
 [ -d /Applications/VLC.app ] || say "Note: VLC isn't in /Applications. Get it from https://www.videolan.org"
 
-# --- Choose one model.
+# --- Choose one model (--update keeps the installed one).
 CHOICE=""
-if [ "${1:-}" = "--model" ]; then
+if [ "${1:-}" = "--update" ]; then
+  for m in "${MODELS[@]}"; do [ -f "$DIR/models/ggml-$(field "$m" 1).bin" ] && CHOICE="$m"; done
+  [ -n "$CHOICE" ] || say "No model installed yet, so let's pick one."
+fi
+if [ -n "$CHOICE" ]; then
+  :
+elif [ "${1:-}" = "--model" ]; then
   for m in "${MODELS[@]}"; do [ "$(field "$m" 1)" = "${2:-}" ] && CHOICE="$m"; done
   [ -n "$CHOICE" ] || die "Unknown model '${2:-}'. Choose one of: $(for m in "${MODELS[@]}"; do printf '%s ' "$(field "$m" 1)"; done)"
 elif [ -r /dev/tty ]; then
@@ -102,5 +109,5 @@ else
 fi
 
 say ""
-say "✓ AutoSub is installed with the $NAME model."
+say "✓ AutoSub is up to date, using the $NAME model."
 say "  Restart VLC, open a movie, then choose VLC → Extensions → AutoSub."
